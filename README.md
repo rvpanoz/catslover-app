@@ -110,9 +110,14 @@ npm test
 yarn test
 ```
 
+## Overall
+
 ✅ Scalable - Easy to add new features without cluttering the codebase.
+
 ✅ Modular - Separates concerns (UI, logic, state management).
+
 ✅ Reusable - Encourages the reuse of components and hooks.
+
 ✅ Testable - Clear separation makes writing tests straightforward.
 
 ## Best Practices
