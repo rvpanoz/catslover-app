@@ -28,7 +28,7 @@ A React application for cat lovers, utilizing [TheCatAPI](https://thecatapi.com)
 - **Node.js** (Recommended: latest LTS version)
 - **Package Manager** (npm or yarn)
 
-### Setup (development)
+### Setup
 
 1. Clone the repository:
 
