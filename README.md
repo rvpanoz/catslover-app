@@ -135,4 +135,4 @@ yarn test
 ## Future Improvements
 
 - Implement pagination for breed list
-- Add user authentication for personalized favorites
+- Add user authentication (currently using localStorage with encrypted data for user properties)
