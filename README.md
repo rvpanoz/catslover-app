@@ -55,6 +55,12 @@ A React application for cat lovers, utilizing [TheCatAPI](https://thecatapi.com)
 
    ```
 
+   ..to speed up things, you can use: :)
+   ```
+   VITE_API_KEY=live_jvFvJ5YkRNWk1DtqO3mtVSgJkSV3o5PbsqWKvQwbtFMwrdqoJuafSZbCvLukJur2
+   VITE_SECRET_KEY=hwbts4yitag4inhwbt
+   ```
+   
 ### Production build and preview environment
 
 For previewing the production build issue the command:
