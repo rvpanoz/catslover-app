@@ -149,14 +149,14 @@ const CatDetails: React.FC<CatDetailsProps> = ({
         </div>
         {catBreed ? (
           <>
-            <p className="mb-1 mt-4 text-gray-900 dark:text-gray-600">
+            <div className="flex space-x-1 align-center mb-1 mt-4 text-gray-900 dark:text-gray-600">
               <a
                 onClick={() => closeModalAndNavigate()}
-                className="inline-flex items-center text-sm font-medium text-primary-700 hover:text-gray-900 hover:cursor-pointer"
+                className="items-center text-sm font-medium dark:text-gray-600 hover:text-gray-400 hover:cursor-pointer"
               >
                 {catBreed.name}
               </a>
-            </p>
+            </div>
             <hr />
             <p className="mt-2 text-gray-900 dark:text-gray-600">
               <span className="text-sm font-medium ">Origin:&nbsp;</span>
