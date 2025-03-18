@@ -53,45 +53,47 @@ const BreedDetails: React.FC<BreedDetailsProps> = ({
     return null;
   }
 
+  const [breedDetails] = data[0].breeds ?? [];
+
   return (
-    <div className="py-2 sm:py-2">
-      {data.map((item: Item, idx: number) => (
-        <div className="flex flex-row" key={item.id}>
-          <div className="w-64 flex-1">
-            <a
-              onClick={() => navigate(`/cats/${item.id}`)}
-              className="hover:cursor-pointer"
-            >
-              <img
-                className="rounded-lg dark:border-2 dark:border-gray-300 h-48 w-48 object-cover drop-shadow-md rounded-md m-auto"
-                src={item.url}
-                alt="cat image"
-              />
-            </a>
-            <div className="mt-4">
-              <span className="text-sm font-medium">
-                Breed&nbsp;{item.breeds[idx].name}
-              </span>
-              <hr className="mb-3" />
-              <span className="text-sm font-medium ">Origin:&nbsp;</span>
-              <span className="text-sm font-medium ">
-                {item.breeds[idx].origin}
-              </span>
-              <br />
-              <span className="text-sm font-medium ">Life span:&nbsp;</span>
-              <span className="text-sm font-medium ">
-                {item.breeds[idx].life_span}&nbsp;years
-              </span>
-            </div>
-            <div className="mt-4">
-              <span className="text-sm font-medium ">Description:&nbsp;</span>
-              <span className="text-sm font-medium ">
-                {item.breeds[idx].description}
-              </span>
-            </div>
-          </div>
+    <div className="py-2 sm:py-2 w-full-auto">
+      <div className="grid grid-cols-3 gap-4">
+        {data.map((item: Item, idx: number) => (
+          <a
+            key={item.id}
+            onClick={() => navigate(`/cats/${item.id}`)}
+            className="hover:cursor-pointer"
+          >
+            <img
+              className="rounded-lg dark:border-2 dark:border-gray-300 h-24 w-24 object-cover drop-shadow-md rounded-md m-auto dark:hover:cursor-pointer"
+              src={item.url}
+              alt={item.id}
+            />
+          </a>
+        ))}
+      </div>
+      <div className="mt-4">
+        <span className="text-sm font-medium">
+          Breed&nbsp;{breedDetails?.name ?? "Unkwown"}
+        </span>
+        <hr className="mb-3" />
+        <span className="text-sm font-medium ">Origin:&nbsp;</span>
+        <span className="text-sm font-medium ">
+          {breedDetails?.origin ?? "Unkwown"}
+        </span>
+        <br />
+        <span className="text-sm font-medium ">Life span:&nbsp;</span>
+        <span className="text-sm font-medium ">
+          {breedDetails?.life_span ?? "Unkwown"}&nbsp;years
+        </span>
+
+        <div className="mt-4">
+          <span className="text-sm font-medium ">Description:&nbsp;</span>
+          <span className="text-sm font-medium ">
+            {breedDetails?.description ?? "Unkwown"}
+          </span>
         </div>
-      ))}
+      </div>
     </div>
   );
 };

@@ -67,7 +67,7 @@ describe("BreedDetails Component", () => {
     const mockData = [
       {
         id: "cat123",
-        url: "https://example.com/cat.jpg",
+        url: "https://api.com/cat.jpg",
         breeds: [
           {
             name: "Siamese",

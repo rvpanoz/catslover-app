@@ -16,7 +16,7 @@ export const fetchBreeds = async () => {
 
 export const fetchBreed = async (userId: string, id: string) => {
   const endpoint = new URL(
-    `v1/images/search?breed_id=${id}&sub_id=${userId}`,
+    `v1/images/search?breed_id=${id}&sub_id=${userId}&limit=10`,
     config.API_URL
   );
 
