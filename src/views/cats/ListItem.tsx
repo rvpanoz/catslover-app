@@ -1,8 +1,9 @@
 import React from "react";
+import { Cat } from "../../types/catTypes";
 
 interface Props {
-  item: any;
-  onClick: () => void;
+  item: Cat;
+  onClick: (id: string) => void;
 }
 
 const ListItem: React.FC<Props> = ({ item, onClick }) => {
@@ -14,7 +15,7 @@ const ListItem: React.FC<Props> = ({ item, onClick }) => {
             className="rounded-lg dark:border-2 dark:border-gray-300 h-48 w-96 object-cover drop-shadow-md rounded-md m-auto dark:hover:cursor-pointer"
             src={item.url}
             alt={item.id}
-            onClick={onClick}
+            onClick={() => onClick(item.id)}
           />
           {item.favourite ? (
             <div className="mt-2">

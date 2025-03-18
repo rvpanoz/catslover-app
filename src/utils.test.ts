@@ -13,7 +13,7 @@ jest.mock("crypto-js", () => ({
   enc: { Utf8: "Utf8" },
 }));
 
-describe("Crypto Storage Utilities", () => {
+describe("Utilities", () => {
   beforeEach(() => {
     Object.defineProperty(window, "localStorage", {
       value: {

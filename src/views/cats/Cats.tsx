@@ -3,7 +3,6 @@ import React, {
   useReducer,
   useRef,
   useMemo,
-  JSX,
   useCallback,
 } from "react";
 import { useNavigate, useParams } from "react-router";
@@ -23,13 +22,15 @@ import { Cat } from "../../types/catTypes";
 import { fetchCats } from "../../api/catsService";
 import { MESSAGES } from "../../constants";
 
-const Cats: React.FC = (): JSX.Element => {
+const MemoizedList = React.memo(List);
+const MemoizedListItem = React.memo(ListItem);
+
+const Cats: React.FC = (): React.JSX.Element => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { state: appState, dispatch: appDispatch } = useAppContext();
   const [state, dispatch] = useReducer(catsReducer, initialState);
   const bottomRef = useRef<HTMLDivElement>(null);
-
   const {
     data: dataSet,
     loading,
@@ -37,14 +38,16 @@ const Cats: React.FC = (): JSX.Element => {
     fetchData,
   } = useFetch(() => fetchCats(appState.user.id, state.page));
 
-  const favourites = useMemo(() => {
-    return state.data
-      ?.filter((cat) => Boolean(cat?.favourite))
-      .map((fav) => fav.id);
+  const isFavourite = useMemo(() => {
+    const favSet = new Set(
+      state.data.filter((cat) => cat.favourite).map((cat) => cat.id)
+    );
+    return (id: string) => favSet.has(id);
   }, [state.data]);
 
   const openModal = useCallback(
     (id: string) => {
+      const favouriteStatus = isFavourite(id);
       navigate(`/cats/${id}`);
 
       appDispatch({
@@ -52,18 +55,16 @@ const Cats: React.FC = (): JSX.Element => {
         payload: {
           isOpen: true,
           title: "Cat details",
-          content: (
-            <CatDetails
-              catId={id}
-              isFavourite={state.data.some(
-                (cat) => cat.id === id && cat.favourite
-              )}
-            />
-          ),
+          content: <CatDetails catId={id} isFavourite={favouriteStatus} />,
         },
       });
     },
-    [appDispatch, navigate, state.data]
+    [appDispatch, navigate, isFavourite]
+  );
+
+  const handleItemClick = useCallback(
+    (id: string) => () => openModal(id),
+    [openModal]
   );
 
   useEffect(() => {
@@ -74,7 +75,7 @@ const Cats: React.FC = (): JSX.Element => {
 
   useEffect(() => {
     fetchData();
-  }, [state.page]);
+  }, [state.page, appState.user.id]);
 
   useEffect(() => {
     if (dataSet?.length) {
@@ -108,19 +109,19 @@ const Cats: React.FC = (): JSX.Element => {
       <div className="flex flex-col mt-4 items-center">
         <div className="overflow-x-auto mb-4">
           {state.data?.length ? (
-            <List>
-              {state.data
-                .filter((cat: Cat) => Boolean(cat?.url))
-                .map((cat: Cat) => {
-                  return (
-                    <ListItem
-                      item={cat}
-                      key={cat.id}
-                      onClick={() => openModal(cat.id)}
-                    />
-                  );
-                })}
-            </List>
+            <MemoizedList>
+              {state.data.map((cat: Cat) => {
+                return (
+                  <MemoizedListItem
+                    item={cat}
+                    key={`${cat.id}-${cat.height}-${cat.width}`}
+                    onClick={handleItemClick(cat.id)}
+                  />
+                );
+              })}
+            </MemoizedList>
+          ) : !loading ? (
+            <span className="text-white">{MESSAGES.noData}</span>
           ) : null}
         </div>
         <div ref={bottomRef} />

@@ -53,13 +53,13 @@ describe("CatDetails Component", () => {
     (useFetch as jest.Mock)
       .mockReturnValueOnce({
         loading: false,
-        data: { url: "https://example.com/cat.jpg", breeds: [] },
+        data: { url: "https://api.com/cat.jpg", breeds: [] },
         error: null,
         fetchData: jest.fn(),
       })
       .mockReturnValueOnce({
         loading: false,
-        data: [], // Ensure no favourites initially
+        data: [],
         error: null,
         fetchData: jest.fn(),
       })
@@ -72,16 +72,13 @@ describe("CatDetails Component", () => {
 
     render(<CatDetails catId="cat-1" isFavourite={false} />);
 
-    // Ensure button is present
     await waitFor(() =>
       expect(
         screen.getByRole("button", { name: /Add to favourites/i })
       ).toBeInTheDocument()
     );
 
-    // Click button
     fireEvent.click(screen.getByRole("button", { name: /Add to favourites/i }));
-
     await waitFor(() => expect(mockAddFavourite).toHaveBeenCalled());
   });
 

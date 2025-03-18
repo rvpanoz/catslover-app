@@ -1,4 +1,4 @@
-import React, { JSX, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import useFetch from "../../hooks/useFetch";
 import { Breed } from "../../types/catTypes";
@@ -17,7 +17,7 @@ type Item = {
 
 const BreedDetails: React.FC<BreedDetailsProps> = ({
   id,
-}): JSX.Element | null => {
+}): React.JSX.Element | null => {
   const navigate = useNavigate();
   const { state: appState, dispatch: appDispatch } = useAppContext();
   const { loading, data, error, fetchData } = useFetch(() =>
