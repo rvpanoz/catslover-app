@@ -18,7 +18,7 @@ A React application for cat lovers, utilizing [TheCatAPI](https://thecatapi.com)
 - **Context API** – State management (instead of Redux)
 - **Jest** – Unit testing
 - **TheCatAPI** – API for fetching cat images and breeds
-
+- **localStorage** - storing user properties (encrypted)
 ---
 
 ## 📥 Installation
