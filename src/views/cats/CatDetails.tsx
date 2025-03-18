@@ -1,4 +1,4 @@
-import React, { JSX, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import { useAppContext } from "../../context/AppContext";
 import Button from "../../components/button/Button";
@@ -14,7 +14,7 @@ interface CatDetailsProps {
 const CatDetails: React.FC<CatDetailsProps> = ({
   catId,
   isFavourite,
-}): JSX.Element | null => {
+}): React.JSX.Element | null => {
   const { state: appState, dispatch: appDispatch } = useAppContext();
   const navigate = useNavigate();
   const [favourite, setFavourite] = useState<boolean>(isFavourite);
@@ -45,8 +45,11 @@ const CatDetails: React.FC<CatDetailsProps> = ({
   const [catBreed] = cat?.breeds ?? [];
 
   const closeModalAndNavigate = () => {
-    const [breed] = cat.breeds;
+    if (!cat || !cat.breeds?.length) {
+      return;
+    }
 
+    const [breed] = cat.breeds;
     appDispatch({
       type: "TOGGLE_MODAL",
       payload: {
@@ -59,21 +62,26 @@ const CatDetails: React.FC<CatDetailsProps> = ({
     navigate(`/breeds/${breed.id}`);
   };
 
+  const handleAddFavourite = async () => {
+    await addFavourite();
+    setFavourite(true);
+
+    fetchFavData();
+  };
+
   useEffect(() => {
-    Promise.all([fetchData(), fetchFavData()]);
+    fetchData();
+    fetchFavData();
   }, [catId]);
 
   useEffect(() => {
-    if (!favData || isFavourite) {
+    if (!favData || favourite) {
       return;
     }
-
-    // check against latest favourites additions
-    const isCatFavourite = favData.find((fav: any) => fav.image_id === catId);
-    if (isCatFavourite) {
+    if (favData.some((fav: any) => fav.image_id === catId)) {
       setFavourite(true);
     }
-  }, [favData, catId, isFavourite]);
+  }, [favData, catId, favourite]);
 
   useEffect(() => {
     if (!cat) {
@@ -90,14 +98,9 @@ const CatDetails: React.FC<CatDetailsProps> = ({
   }, [cat]);
 
   useEffect(() => {
-    async function onAfterFavAdded() {
-      if (favAddData?.message === "SUCCESS") {
-        setFavourite(true);
-        fetchFavData();
-      }
+    if (favAddData?.message === "SUCCESS") {
+      setFavourite(true);
     }
-
-    onAfterFavAdded();
   }, [favAddData]);
 
   if (error || favError) {
@@ -139,7 +142,7 @@ const CatDetails: React.FC<CatDetailsProps> = ({
             <img
               className="rounded-lg dark:border-0 object-cover rounded-md"
               src={imgSrc}
-              alt="cat image"
+              alt="cat-img"
               data-testid="cat-id"
             />
           ) : null}
@@ -188,7 +191,7 @@ const CatDetails: React.FC<CatDetailsProps> = ({
                 </svg>
               }
               label={favAddLoading ? "Loading.." : "Add to favourites"}
-              onClick={() => addFavourite()}
+              onClick={handleAddFavourite}
               disabled={favAddLoading}
             ></Button>
           ) : null}

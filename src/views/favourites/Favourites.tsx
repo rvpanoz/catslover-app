@@ -1,4 +1,4 @@
-import React, { useState, JSX, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import List from "./List";
 import ListItem from "./ListItem";
 import { useAppContext } from "../../context/AppContext";
@@ -9,7 +9,7 @@ import { fetchFavourites, removeFavourite } from "../../api/favoritesService";
 import { Favourite } from "../../types/favouritesTypes";
 import { MESSAGES } from "../../constants";
 
-const Favourites: React.FC = (): JSX.Element => {
+const Favourites: React.FC = (): React.JSX.Element => {
   const { state: appState, dispatch: appDispatch } = useAppContext();
   const [generalError, setGeneralError] = useState<string>("");
   const { loading, data, error, fetchData } = useFetch(() =>

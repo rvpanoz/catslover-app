@@ -8,7 +8,7 @@ import TableRow from "./TableRow";
 import BreedDetails from "./BreedDetails";
 import { fetchBreeds } from "../../api/breedsService";
 
-const Breeds: React.FC = () => {
+const Breeds: React.FC = (): React.JSX.Element => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { state: appState, dispatch: appDispatch } = useAppContext();
