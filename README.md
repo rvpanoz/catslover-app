@@ -70,7 +70,7 @@ Visit **http://localhost:4173** in your browser to view app.
 
 ### Development server
 
-2. Start the development server
+1. Start the development server
 
    ```sh
    npm run dev
@@ -78,6 +78,8 @@ Visit **http://localhost:4173** in your browser to view app.
    yarn dev
 
    ```
+
+   Visit **http://localhost:5173** in your browser to view app.
 
 ## Project structure
 
