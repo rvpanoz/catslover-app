@@ -67,7 +67,7 @@ describe("BreedDetails Component", () => {
     const mockData = [
       {
         id: "cat123",
-        url: "https://example.com/cat.jpg",
+        url: "https://api.com/cat.jpg",
         breeds: [
           {
             name: "Siamese",
@@ -98,7 +98,7 @@ describe("BreedDetails Component", () => {
     expect(screen.getByText(/Description/i)).toBeInTheDocument();
     expect(screen.getByRole("img")).toHaveAttribute(
       "src",
-      "https://example.com/cat.jpg"
+      "https://api.com/cat.jpg"
     );
   });
 
@@ -106,7 +106,7 @@ describe("BreedDetails Component", () => {
     const mockData = [
       {
         id: "cat123",
-        url: "https://example.com/cat.jpg",
+        url: "https://api.com/cat.jpg",
         breeds: [
           {
             name: "Siamese",
