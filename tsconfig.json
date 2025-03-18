@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "types": ["node", "jest", "@testing-library/jest-dom"],
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "src/*": ["src/*"],
+      "views": ["views/*"],
+      "components": ["components/*"],
+      "common": ["common/*"],
+      "context": ["context/*"]
+    },
+    "noFallthroughCasesInSwitch": true,
+    "outDir": "./dist"
+  },
+  "compileOnSave": true,
+  "include": [
+    "src/**/*",
+    "views/**/*",
+    "components/**/*",
+    "common/**/*",
+    "context/**/*",
+    "types/**/*",
+    ".vite-env.d.ts",
+    "__mocks__"
+  ],
+  "exclude": ["node_modules", "dist"]
+}
