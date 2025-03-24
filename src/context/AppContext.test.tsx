@@ -1,6 +1,6 @@
 import React from "react";
 import { render, act, screen } from "@testing-library/react";
-import { AppProvider, useAppContext } from "../context/AppContext"; // Adjust the import path
+import { AppProvider, useAppContext } from "../context/AppContext";
 import { decryptUserId, encryptAndStoreUserId } from "../utils";
 import { v4 as uuidv4 } from "uuid";
 
