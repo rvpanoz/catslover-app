@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import ListItem from "./ListItem"; // Adjust import path as needed
+import ListItem from "./ListItem";
 import { Favourite } from "../../types/favouritesTypes";
 
 describe("ListItem Component", () => {
